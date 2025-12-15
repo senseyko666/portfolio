@@ -285,4 +285,23 @@ function scrollToPlugin(pluginId) {
             element.style.boxShadow = '';
         }, 2000);
     }
+}// Task
+ Checker screenshot gallery
+function showTaskCheckerImage(imageNumber) {
+    const image = document.getElementById('taskCheckerImage');
+    const buttons = document.querySelectorAll('.screenshot-btn');
+    
+    // Update image source
+    image.src = `demos/Task Checker/${imageNumber}.jpg`;
+    
+    // Update active button
+    buttons.forEach((btn, index) => {
+        btn.classList.toggle('active', index === imageNumber - 1);
+    });
+    
+    // Add fade effect
+    image.style.opacity = '0.7';
+    setTimeout(() => {
+        image.style.opacity = '1';
+    }, 150);
 }

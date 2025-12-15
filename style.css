@@ -910,4 +910,64 @@ ntact links */
 
 .contact-item a:hover {
     color: #6366f1;
+}/* Scree
+nshot gallery for Task Checker */
+.screenshot-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.screenshot-container {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.screenshot-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.screenshot-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.screenshot-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #6b7280;
+    transition: all 0.3s ease;
+}
+
+.screenshot-btn:hover {
+    border-color: #6366f1;
+    color: #6366f1;
+}
+
+.screenshot-btn.active {
+    border-color: #6366f1;
+    background: #6366f1;
+    color: white;
+}
+
+/* Video styles for plugins */
+.plugin-demo video {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
