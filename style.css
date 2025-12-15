@@ -344,15 +344,15 @@ jects Section */
 
 /* Contact Section */
 .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    display: flex;
+    justify-content: center;
 }
 
 .contact-info {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    max-width: 1000px;
 }
 
 .contact-item {
@@ -499,7 +499,7 @@ jects Section */
         grid-template-columns: 1fr;
     }
     
-    .contact-content {
+    .contact-info {
         grid-template-columns: 1fr;
     }
     
@@ -900,4 +900,14 @@ lickable project cards */
 
 .project-card[onclick]:active {
     transform: translateY(-4px);
+}/* Co
+ntact links */
+.contact-item a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #6366f1;
 }
