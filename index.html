@@ -490,14 +490,16 @@
                     <div class="plugin-demo">
                         <div class="screenshot-gallery">
                             <div class="screenshot-container">
+                                <button class="screenshot-arrow screenshot-arrow-left" onclick="previousTaskCheckerImage()">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
                                 <img id="taskCheckerImage" src="demos/Task Checker/1.jpg" alt="Task Checker Screenshot">
+                                <button class="screenshot-arrow screenshot-arrow-right" onclick="nextTaskCheckerImage()">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
                             </div>
-                            <div class="screenshot-controls">
-                                <button class="screenshot-btn active" onclick="showTaskCheckerImage(1)">1</button>
-                                <button class="screenshot-btn" onclick="showTaskCheckerImage(2)">2</button>
-                                <button class="screenshot-btn" onclick="showTaskCheckerImage(3)">3</button>
-                                <button class="screenshot-btn" onclick="showTaskCheckerImage(4)">4</button>
-                                <button class="screenshot-btn" onclick="showTaskCheckerImage(5)">5</button>
+                            <div class="screenshot-indicator">
+                                <span id="taskCheckerIndicator">1 / 5</span>
                             </div>
                         </div>
                     </div>

@@ -920,6 +920,7 @@ nshot gallery for Task Checker */
 }
 
 .screenshot-container {
+    position: relative;
     width: 100%;
     max-width: 600px;
     border-radius: 8px;
@@ -934,33 +935,45 @@ nshot gallery for Task Checker */
     transition: opacity 0.3s ease;
 }
 
-.screenshot-controls {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-}
-
-.screenshot-btn {
-    width: 40px;
-    height: 40px;
-    border: 2px solid #e5e7eb;
-    background: white;
-    border-radius: 8px;
+.screenshot-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
-    font-weight: 600;
-    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #374151;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.screenshot-btn:hover {
-    border-color: #6366f1;
+.screenshot-arrow:hover {
+    background: white;
     color: #6366f1;
+    transform: translateY(-50%) scale(1.1);
 }
 
-.screenshot-btn.active {
-    border-color: #6366f1;
-    background: #6366f1;
-    color: white;
+.screenshot-arrow-left {
+    left: 15px;
+}
+
+.screenshot-arrow-right {
+    right: 15px;
+}
+
+.screenshot-indicator {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
 }
 
 /* Video styles for plugins */
@@ -970,4 +983,20 @@ nshot gallery for Task Checker */
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}/* Mobile s
+tyles for screenshot arrows */
+@media (max-width: 768px) {
+    .screenshot-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .screenshot-arrow-left {
+        left: 10px;
+    }
+    
+    .screenshot-arrow-right {
+        right: 10px;
+    }
 }
