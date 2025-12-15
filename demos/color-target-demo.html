@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Target - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .demo-header h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .demo-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .demo-content {
+            padding: 20px;
+        }
+
+        .image-selector {
+            margin-bottom: 20px;
+        }
+
+        .image-selector h3 {
+            margin-bottom: 10px;
+            color: #374151;
+            font-size: 16px;
+        }
+
+        .image-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .image-btn {
+            padding: 8px 16px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .image-btn:hover {
+            border-color: #6366f1;
+            background: #f8fafc;
+        }
+
+        .image-btn.active {
+            border-color: #6366f1;
+            background: #6366f1;
+            color: white;
+        }
+
+        .color-tools {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-section {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .tool-section h4 {
+            margin-bottom: 10px;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .color-picker-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+            border-radius: 8px;
+            cursor: crosshair;
+            margin-bottom: 10px;
+        }
+
+        .color-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .color-values {
+            flex: 1;
+        }
+
+        .color-value {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .palette-section {
+            grid-column: 1 / -1;
+        }
+
+        .palette-colors {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .palette-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .palette-color:hover {
+            transform: scale(1.1);
+        }
+
+        .test-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .color-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h2>🎨 Color Target</h2>
+            <p>Интерактивный инструмент для работы с цветами и палитрами</p>
+        </div>
+
+        <div class="demo-content">
+            <div class="image-selector">
+                <h3>Выберите тестовое изображение:</h3>
+                <div class="image-buttons">
+                    <button class="image-btn active" onclick="loadTestImage(1)">Градиент 1</button>
+                    <button class="image-btn" onclick="loadTestImage(2)">Градиент 2</button>
+                    <button class="image-btn" onclick="loadTestImage(3)">Градиент 3</button>
+                </div>
+                <img id="testImage" class="test-image" src="assets/test-image-1.svg" alt="Test Image">
+            </div>
+
+            <div class="color-tools">
+                <div class="tool-section">
+                    <h4>🎯 Выбор цвета</h4>
+                    <div class="color-picker-container" onclick="pickColor(event)"></div>
+                    <div class="color-display">
+                        <div class="color-preview" id="colorPreview" style="background-color: #ff0000;"></div>
+                        <div class="color-values">
+                            <div class="color-value">
+                                <span>HEX:</span>
+                                <span id="hexValue">#FF0000</span>
+                            </div>
+                            <div class="color-value">
+                                <span>RGB:</span>
+                                <span id="rgbValue">rgb(255, 0, 0)</span>
+                            </div>
+                            <div class="color-value">
+                                <span>HSL:</span>
+                                <span id="hslValue">hsl(0, 100%, 50%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-section">
+                    <h4>🎨 Генератор палитр</h4>
+                    <div style="margin-bottom: 10px;">
+                        <button onclick="generatePalette('complementary')" style="margin-right: 5px; padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; background: white; cursor: pointer;">Комплементарная</button>
+                        <button onclick="generatePalette('triadic')" style="padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; background: white; cursor: pointer;">Триадная</button>
+                    </div>
+                    <div class="palette-colors" id="paletteColors">
+                        <div class="palette-color" style="background-color: #ff0000;"></div>
+                        <div class="palette-color" style="background-color: #00ff00;"></div>
+                        <div class="palette-color" style="background-color: #0000ff;"></div>
+                    </div>
+                </div>
+
+                <div class="tool-section palette-section">
+                    <h4>📊 Анализ контрастности</h4>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div style="padding: 10px; background: #000; color: #fff; border-radius: 4px; font-size: 12px;">
+                            Черный текст: <span id="blackContrast">21:1</span>
+                        </div>
+                        <div style="padding: 10px; background: #fff; color: #000; border-radius: 4px; font-size: 12px; border: 1px solid #ccc;">
+                            Белый текст: <span id="whiteContrast">1:1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentColor = { r: 255, g: 0, b: 0 };
+
+        function loadTestImage(imageNumber) {
+            const image = document.getElementById('testImage');
+            const buttons = document.querySelectorAll('.image-btn');
+            
+            // Обновляем активную кнопку
+            buttons.forEach((btn, index) => {
+                btn.classList.toggle('active', index === imageNumber - 1);
+            });
+            
+            // Загружаем изображение
+            image.src = `assets/test-image-${imageNumber}.svg`;
+        }
+
+        function pickColor(event) {
+            const rect = event.target.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const width = rect.width;
+            
+            // Простой расчет цвета по позиции X (радуга)
+            const hue = (x / width) * 360;
+            const color = hslToRgb(hue, 100, 50);
+            
+            currentColor = color;
+            updateColorDisplay();
+        }
+
+        function hslToRgb(h, s, l) {
+            h /= 360;
+            s /= 100;
+            l /= 100;
+            
+            const c = (1 - Math.abs(2 * l - 1)) * s;
+            const x = c * (1 - Math.abs((h * 6) % 2 - 1));
+            const m = l - c / 2;
+            
+            let r, g, b;
+            
+            if (0 <= h && h < 1/6) {
+                r = c; g = x; b = 0;
+            } else if (1/6 <= h && h < 2/6) {
+                r = x; g = c; b = 0;
+            } else if (2/6 <= h && h < 3/6) {
+                r = 0; g = c; b = x;
+            } else if (3/6 <= h && h < 4/6) {
+                r = 0; g = x; b = c;
+            } else if (4/6 <= h && h < 5/6) {
+                r = x; g = 0; b = c;
+            } else {
+                r = c; g = 0; b = x;
+            }
+            
+            return {
+                r: Math.round((r + m) * 255),
+                g: Math.round((g + m) * 255),
+                b: Math.round((b + m) * 255)
+            };
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const diff = max - min;
+            const sum = max + min;
+            const l = sum / 2;
+            
+            let h, s;
+            
+            if (diff === 0) {
+                h = s = 0;
+            } else {
+                s = l > 0.5 ? diff / (2 - sum) : diff / sum;
+                
+                switch (max) {
+                    case r: h = (g - b) / diff + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / diff + 2; break;
+                    case b: h = (r - g) / diff + 4; break;
+                }
+                h /= 6;
+            }
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        function updateColorDisplay() {
+            const { r, g, b } = currentColor;
+            const hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`.toUpperCase();
+            const hsl = rgbToHsl(r, g, b);
+            
+            document.getElementById('colorPreview').style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            document.getElementById('hexValue').textContent = hex;
+            document.getElementById('rgbValue').textContent = `rgb(${r}, ${g}, ${b})`;
+            document.getElementById('hslValue').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+            
+            updateContrast();
+        }
+
+        function updateContrast() {
+            const { r, g, b } = currentColor;
+            const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+            
+            const blackContrast = (luminance + 0.05) / 0.05;
+            const whiteContrast = 1.05 / (luminance + 0.05);
+            
+            document.getElementById('blackContrast').textContent = blackContrast.toFixed(1) + ':1';
+            document.getElementById('whiteContrast').textContent = whiteContrast.toFixed(1) + ':1';
+        }
+
+        function generatePalette(type) {
+            const { r, g, b } = currentColor;
+            const hsl = rgbToHsl(r, g, b);
+            const paletteContainer = document.getElementById('paletteColors');
+            
+            let colors = [];
+            
+            if (type === 'complementary') {
+                colors = [
+                    hsl,
+                    { h: (hsl.h + 180) % 360, s: hsl.s, l: hsl.l }
+                ];
+            } else if (type === 'triadic') {
+                colors = [
+                    hsl,
+                    { h: (hsl.h + 120) % 360, s: hsl.s, l: hsl.l },
+                    { h: (hsl.h + 240) % 360, s: hsl.s, l: hsl.l }
+                ];
+            }
+            
+            paletteContainer.innerHTML = '';
+            colors.forEach(color => {
+                const rgb = hslToRgb(color.h, color.s, color.l);
+                const div = document.createElement('div');
+                div.className = 'palette-color';
+                div.style.backgroundColor = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+                div.onclick = () => {
+                    currentColor = rgb;
+                    updateColorDisplay();
+                };
+                paletteContainer.appendChild(div);
+            });
+        }
+
+        // Инициализация
+        updateColorDisplay();
+    </script>
+</body>
+</html>
