@@ -57,7 +57,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.skill-card, .project-card, .contact-item');
-    
+
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -71,26 +71,26 @@ const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         // Get form data
         const formData = new FormData(contactForm);
         const name = contactForm.querySelector('input[type="text"]').value;
         const email = contactForm.querySelector('input[type="email"]').value;
         const message = contactForm.querySelector('textarea').value;
-        
+
         // Simple validation
         if (!name || !email || !message) {
             alert('Пожалуйста, заполните все поля');
             return;
         }
-        
+
         // Simulate form submission
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
-        
+
         submitBtn.textContent = 'Отправляется...';
         submitBtn.disabled = true;
-        
+
         setTimeout(() => {
             alert('Сообщение отправлено! Спасибо за обращение.');
             contactForm.reset();
@@ -104,7 +104,7 @@ if (contactForm) {
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
-    
+
     function type() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
@@ -112,7 +112,7 @@ function typeWriter(element, text, speed = 100) {
             setTimeout(type, speed);
         }
     }
-    
+
     type();
 }
 
@@ -129,7 +129,7 @@ window.addEventListener('load', () => {
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -138,7 +138,7 @@ window.addEventListener('scroll', () => {
             current = section.getAttribute('id');
         }
     });
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
@@ -160,7 +160,7 @@ window.addEventListener('scroll', () => {
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16);
-    
+
     function updateCounter() {
         start += increment;
         if (start < target) {
@@ -170,7 +170,7 @@ function animateCounter(element, target, duration = 2000) {
             element.textContent = target + '+';
         }
     }
-    
+
     updateCounter();
 }
 
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
 howcase animations
 document.addEventListener('DOMContentLoaded', () => {
     const pluginShowcases = document.querySelectorAll('.plugin-showcase');
-    
+
     pluginShowcases.forEach(showcase => {
         showcase.style.opacity = '0';
         showcase.style.transform = 'translateY(50px)';
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Demo placeholder interaction
 document.addEventListener('DOMContentLoaded', () => {
     const demoPlaceholders = document.querySelectorAll('.demo-placeholder');
-    
+
     demoPlaceholders.forEach(placeholder => {
         placeholder.addEventListener('click', () => {
             placeholder.style.transform = 'scale(0.95)';
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 placeholder.style.transform = 'scale(1)';
             }, 150);
         });
-        
+
         placeholder.style.cursor = 'pointer';
         placeholder.style.transition = 'transform 0.15s ease';
     });
@@ -255,22 +255,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // Plugin tech tags hover effect
 document.addEventListener('DOMContentLoaded', () => {
     const techTags = document.querySelectorAll('.plugin-tech span');
-    
+
     techTags.forEach(tag => {
         tag.addEventListener('mouseenter', () => {
             tag.style.transform = 'translateY(-2px)';
             tag.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
         });
-        
+
         tag.addEventListener('mouseleave', () => {
             tag.style.transform = 'translateY(0)';
             tag.style.boxShadow = 'none';
         });
-        
+
         tag.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
     });
 });/
-/ Scroll to plugin function
+    / Scroll to plugin function
 function scrollToPlugin(pluginId) {
     const element = document.getElementById(pluginId);
     if (element) {
@@ -278,7 +278,7 @@ function scrollToPlugin(pluginId) {
             behavior: 'smooth',
             block: 'start'
         });
-        
+
         // Add highlight effect
         element.style.boxShadow = '0 0 20px rgba(99, 102, 241, 0.3)';
         setTimeout(() => {
@@ -290,15 +290,15 @@ function scrollToPlugin(pluginId) {
 function showTaskCheckerImage(imageNumber) {
     const image = document.getElementById('taskCheckerImage');
     const buttons = document.querySelectorAll('.screenshot-btn');
-    
+
     // Update image source
     image.src = `demos/Task Checker/${imageNumber}.jpg`;
-    
+
     // Update active button
     buttons.forEach((btn, index) => {
         btn.classList.toggle('active', index === imageNumber - 1);
     });
-    
+
     // Add fade effect
     image.style.opacity = '0.7';
     setTimeout(() => {
@@ -322,16 +322,16 @@ function previousTaskCheckerImage() {
 function updateTaskCheckerImage(imageNumber) {
     const image = document.getElementById('taskCheckerImage');
     const indicator = document.getElementById('taskCheckerIndicator');
-    
+
     // Update current image number
     currentTaskCheckerImage = imageNumber;
-    
+
     // Update image source
     image.src = `demos/Task Checker/${imageNumber}.jpg`;
-    
+
     // Update indicator
     indicator.textContent = `${imageNumber} / ${totalTaskCheckerImages}`;
-    
+
     // Add fade effect
     image.style.opacity = '0.7';
     setTimeout(() => {
