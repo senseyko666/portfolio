@@ -886,4 +886,18 @@ lugins Section */
     .feature-item i {
         margin-top: 0;
     }
+}/* C
+lickable project cards */
+.project-card[onclick] {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card[onclick]:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-card[onclick]:active {
+    transform: translateY(-4px);
 }

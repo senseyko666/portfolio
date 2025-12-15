@@ -269,4 +269,20 @@ document.addEventListener('DOMContentLoaded', () => {
         
         tag.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
     });
-});
+});/
+/ Scroll to plugin function
+function scrollToPlugin(pluginId) {
+    const element = document.getElementById(pluginId);
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Add highlight effect
+        element.style.boxShadow = '0 0 20px rgba(99, 102, 241, 0.3)';
+        setTimeout(() => {
+            element.style.boxShadow = '';
+        }, 2000);
+    }
+}
