@@ -193,8 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statsSection) {
         statsObserver.observe(statsSection);
     }
-});// Plugin s
-howcase animations
+});// Plugin showcase animations
 document.addEventListener('DOMContentLoaded', () => {
     const pluginShowcases = document.querySelectorAll('.plugin-showcase');
 
@@ -269,8 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tag.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
     });
-});/
-    / Scroll to plugin function
+});// Scroll to plugin function
 function scrollToPlugin(pluginId) {
     const element = document.getElementById(pluginId);
     if (element) {
@@ -285,8 +283,7 @@ function scrollToPlugin(pluginId) {
             element.style.boxShadow = '';
         }, 2000);
     }
-}// Task
- Checker screenshot gallery
+}// TaskChecker screenshot gallery
 function showTaskCheckerImage(imageNumber) {
     const image = document.getElementById('taskCheckerImage');
     const buttons = document.querySelectorAll('.screenshot-btn');
@@ -304,8 +301,7 @@ function showTaskCheckerImage(imageNumber) {
     setTimeout(() => {
         image.style.opacity = '1';
     }, 150);
-}// T
-ask Checker slideshow navigation
+}// Task Checker slideshow navigation
 let currentTaskCheckerImage = 1;
 const totalTaskCheckerImages = 5;
 
